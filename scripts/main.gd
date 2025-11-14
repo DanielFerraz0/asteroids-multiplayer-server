@@ -2,12 +2,11 @@ extends Node
 
 var players = {};
 
-
 func _ready():
 	var port_env = OS.get_environment("PORT")
 	var port = port_env.to_int()
 
-	var peer = ENetMultiplayerPeer.new()
+	var peer := WebSocketMultiplayerPeer.new()
 	var error = peer.create_server(port)
 
 	if error != OK:
