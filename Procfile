@@ -1,0 +1,1 @@
+worker: ./Asteroids_Multiplayer_Server.x86_64 --headless --main-pack Asteroids_Multiplayer_Server.pck
