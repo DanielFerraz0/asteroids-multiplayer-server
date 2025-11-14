@@ -1,14 +1,21 @@
 extends Node
 
-const PORT = 9000;
-
 var players = {};
 
+
 func _ready():
+	var port_env = OS.get_environment("PORT")
+	var port = port_env.to_int()
+
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT)
+	var error = peer.create_server(port)
+
+	if error != OK:
+		push_error("Erro ao iniciar servidor: %s" % error)
+	else:
+		print("Servidor iniciado na porta %d" % port)
+
 	multiplayer.multiplayer_peer = peer
-	print("Servidor iniciado na porta %d" % PORT)
 
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
